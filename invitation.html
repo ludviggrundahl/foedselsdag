@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  margin:0;
+  background:#111;
+  color:white;
+  font-family:Arial;
+  overflow:hidden;
+}
+
+.slide {
+  display:none;
+  height:100vh;
+  width:100vw;
+  position:absolute;
+  top:0;
+  left:0;
+}
+
+.slide.active {
+  display:block;
+}
+
+.bg {
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background-position:center;
+  background-size:contain;
+  background-repeat:no-repeat;
+  pointer-events:none;
+}
+
+.double {
+  position:absolute;
+  width:50%;
+  height:100%;
+  background-position:center;
+  background-size:contain;
+  background-repeat:no-repeat;
+  pointer-events:none;
+}
+
+.left { left:0; }
+.right { right:0; }
+
+.overlay {
+  position:absolute;
+  bottom:10%;
+  left:50%;
+  transform:translateX(-50%);
+  display:inline-block;
+  width:auto;
+  max-width:85%;
+  text-align:center;
+  font-size:18px;
+  background:rgba(0,0,0,0.7);
+  padding:12px 18px;
+  border-radius:20px;
+  z-index:10;
+  white-space:normal;
+}
+
+textarea {
+  width:100%;
+  height:120px;
+  margin-top:15px;
+  padding:10px;
+  font-size:16px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 1 -->
+<div class="slide active">
+<div class="bg" style="background-image:url('billede1.jpeg')"></div>
+<div class="overlay"><i>"Hej, det er Ludvig"</i></div>
+</div>
+
+<!-- 2 -->
+<div class="slide">
+<div class="double left" style="background-image:url('billede2.jpeg')"></div>
+<div class="double right" style="background-image:url('billede3.jpeg')"></div>
+<div class="overlay"><i>"For snart 30 år siden blev jeg født, og det vil jeg gerne fejre"</i></div>
+</div>
+
+<!-- 3 -->
+<div class="slide">
+<div class="double left" style="background-image:url('billede4.jpeg')"></div>
+<div class="double right" style="background-image:url('billede5.jpeg')"></div>
+<div class="overlay"><i>"Tag jeres flotteste tøj på og kom med til fest"</i></div>
+</div>
+
+<!-- 4 -->
+<div class="slide">
+<div class="bg" style="background-image:url('billede6.jpeg')"></div>
+<div class="overlay"><i>"Der vil være spil"</i></div>
+</div>
+
+<!-- 5 -->
+<div class="slide">
+<div class="bg" style="background-image:url('billede7.jpeg')"></div>
+<div class="overlay"><i>"Lækker mad"</i></div>
+</div>
+
+<!-- 6 -->
+<div class="slide">
+<div class="bg" style="background-image:url('billede8.jpeg')"></div>
+<div class="overlay"><i>"Friske drinks"</i></div>
+</div>
+
+<!-- 7 -->
+<div class="slide">
+<div class="bg" style="background-image:url('billede9.jpeg')"></div>
+<div class="overlay"><i>"Og mulighed for at give den gas på dansegulvet."</i></div>
+</div>
+
+<!-- RSVP -->
+<div class="slide" onclick="event.stopPropagation()">
+<div class="overlay" style="pointer-events:auto">
+
+<i>
+Det hele går ned d. 1. august fra kl. 14<br><br>
+Rishøj Sidevej 7<br>
+Nakke Hage<br><br>
+Jeg har booket en bus til jer, så I nemt kan komme frem og tilbage.<br><br>
+Bussen kører kl. 12:30 fra Københavns Busterminal,<br>
+Carsten Niebuhrs Gade 30,<br>
+1577 København V<br><br>
+Den kører direkte til festen og tilbage til København igen om aftenen.<br><br>
+Skriv hvem I er, om I vil med bussen (fra KBH, til KBH eller begge veje) og om der er andet jeg skal vide.<br><br>
+Glæder mig til at se jer!
+</i>
+
+<textarea id="message" placeholder="Fx: Vi kommer 3 og vil gerne med bussen begge veje. Anna er vegetar."></textarea>
+
+<br><br>
+
+<button onclick="sendMail()">Send svar</button>
+
+</div>
+</div>
+
+<script>
+let current = 0;
+
+function nextSlide() {
+  const slides = document.querySelectorAll('.slide');
+  if(current < slides.length - 1){
+    slides[current].classList.remove('active');
+    current++;
+    slides[current].classList.add('active');
+  }
+}
+
+document.body.addEventListener('click', function(e){
+  if(!e.target.closest('.overlay')){
+    nextSlide();
+  }
+});
+
+document.addEventListener('keydown', function(){
+  nextSlide();
+});
+
+function sendMail() {
+  let msg = document.getElementById("message").value;
+  window.location.href = "mailto:lugr@sbf.dk?subject=RSVP Ludvigs Fødselsdag&body=" + encodeURIComponent(msg);
+}
+</script>
+
+</body>
+</html>
