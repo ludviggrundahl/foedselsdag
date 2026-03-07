@@ -63,18 +63,18 @@ html, body {
   text-align:center;
 }
 
-/* ✅ RSVP fullscreen scroll fix */
-.rsvp {
+/* RSVP layer */
+#rsvp {
   display:none;
   position:fixed;
   inset:0;
+  background:#111;
   overflow-y:auto;
   -webkit-overflow-scrolling:touch;
-  background:#111;
-  z-index:100;
+  z-index:999;
 }
 
-.rsvp.active {
+#rsvp.active {
   display:block;
 }
 
@@ -91,57 +91,57 @@ textarea {
   padding:10px;
   font-size:16px;
 }
+
+.note {
+  font-size:12px;
+  opacity:0.7;
+  margin-top:10px;
+}
 </style>
 </head>
 
 <body>
 
-<!-- 1 -->
+<!-- Slides -->
 <div class="slide active">
 <div class="bg" style="background-image:url('billede1.jpeg')"></div>
 <div class="overlay"><i>"Hej, det er Ludvig"</i></div>
 </div>
 
-<!-- 2 -->
 <div class="slide">
 <div class="double left" style="background-image:url('billede2.jpeg')"></div>
 <div class="double right" style="background-image:url('billede3.jpeg')"></div>
 <div class="overlay"><i>"For snart 30 år siden blev jeg født, og det vil jeg gerne fejre"</i></div>
 </div>
 
-<!-- 3 -->
 <div class="slide">
 <div class="double left" style="background-image:url('billede4.jpeg')"></div>
 <div class="double right" style="background-image:url('billede5.jpeg')"></div>
 <div class="overlay"><i>"Tag jeres flotteste tøj på og kom med til fest"</i></div>
 </div>
 
-<!-- 4 -->
 <div class="slide">
 <div class="bg" style="background-image:url('billede6.jpeg')"></div>
 <div class="overlay"><i>"Der vil være spil"</i></div>
 </div>
 
-<!-- 5 -->
 <div class="slide">
 <div class="bg" style="background-image:url('billede7.jpeg')"></div>
 <div class="overlay"><i>"Lækker mad"</i></div>
 </div>
 
-<!-- 6 -->
 <div class="slide">
 <div class="bg" style="background-image:url('billede8.jpeg')"></div>
 <div class="overlay"><i>"Friske drinks"</i></div>
 </div>
 
-<!-- 7 -->
 <div class="slide">
 <div class="bg" style="background-image:url('billede9.jpeg')"></div>
 <div class="overlay"><i>"Og mulighed for at give den gas på dansegulvet."</i></div>
 </div>
 
 <!-- RSVP -->
-<div class="rsvp" id="rsvp">
+<div id="rsvp">
 <div class="rsvp-inner">
 
 <i>
@@ -157,11 +157,15 @@ Skriv hvem I er, om I vil med bussen (fra KBH, til KBH eller begge veje) og om d
 Glæder mig til at se jer!
 </i>
 
-<textarea id="message" placeholder="Fx: Vi kommer 3 og vil gerne med bussen begge veje. Anna er vegetar."></textarea>
+<textarea id="message" placeholder="Fx: Vi (Anna og Lotte) er fucking klar til at maxe ud! Vi skal 100p med i partybus begge veje"></textarea>
 
 <br><br>
 
 <button onclick="sendMail()">Send svar</button>
+
+<div class="note">
+Hvis du har åbnet invitationen fra Messenger, så tryk på ⋯ og vælg “Åbn i browser” for at svare.
+</div>
 
 </div>
 </div>
@@ -182,7 +186,7 @@ function nextSlide() {
 }
 
 document.body.addEventListener('click', function(e){
-  if(!e.target.closest('.overlay') && !e.target.closest('.rsvp')){
+  if(!e.target.closest('.overlay') && !e.target.closest('#rsvp')){
     nextSlide();
   }
 });
