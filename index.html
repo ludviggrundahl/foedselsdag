@@ -68,6 +68,22 @@ body {
   white-space:normal;
 }
 
+/* ✅ RSVP FIX */
+.rsvp-slide {
+  overflow-y:auto;
+  padding:40px 0;
+}
+
+.rsvp-overlay {
+  position:relative;
+  bottom:auto;
+  left:auto;
+  transform:none;
+  margin:40px auto;
+  max-width:85%;
+  pointer-events:auto;
+}
+
 textarea {
   width:100%;
   height:120px;
@@ -125,8 +141,8 @@ textarea {
 </div>
 
 <!-- RSVP -->
-<div class="slide" onclick="event.stopPropagation()">
-<div class="overlay" style="pointer-events:auto">
+<div class="slide rsvp-slide" onclick="event.stopPropagation()">
+<div class="overlay rsvp-overlay">
 
 <i>
 Det hele går ned d. 1. august fra kl. 14<br><br>
